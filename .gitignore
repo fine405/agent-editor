@@ -2,3 +2,7 @@ node_modules
 .DS_Store
 dist
 .vite
+.vercel
+agent-api/node_modules
+agent-api/dist
+agent-api/.env
