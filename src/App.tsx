@@ -1,5 +1,9 @@
-import { EditorContent, useEditor } from '@tiptap/react'
+import { useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Toolbar } from '@/components/editor/toolbar'
+import { EditorPanel } from '@/components/editor/editor-panel'
 
 const initialContent = `
   <h2>Minimal writing surface.</h2>
@@ -10,85 +14,52 @@ const initialContent = `
   <p>Use the toolbar to shape the text, or just start typing.</p>
 `
 
-type ToolbarButtonProps = {
-  active?: boolean
-  disabled?: boolean
-  label: string
-  onClick: () => void
-}
-
-function ToolbarButton({ active = false, disabled = false, label, onClick }: ToolbarButtonProps) {
-  return (
-    <button
-      className={`toolbar-button${active ? ' is-active' : ''}`}
-      aria-pressed={active}
-      disabled={disabled}
-      onClick={onClick}
-      type="button"
-    >
-      {label}
-    </button>
-  )
-}
-
 export default function App() {
   const editor = useEditor({
     extensions: [StarterKit],
     content: initialContent,
     editorProps: {
       attributes: {
-        class: 'editor-surface',
+        class: 'tiptap-editor',
       },
     },
   })
 
   return (
-    <main className="page-shell">
-      <section className="editor-card" aria-label="Rich text editor">
-        <div className="editor-header">
-          <div className="hero-copy">
-            <span className="eyebrow">Tiptap Starter</span>
-            <h1>Quiet, fast, and editable.</h1>
-            <p>
-              A minimal editor shell with no extra dependency noise, tuned for writing and quick
-              formatting.
-            </p>
-          </div>
-
-          <div className="status-chip" aria-live="polite">
-            {editor?.isEmpty ? 'Empty document' : 'Ready'}
-          </div>
+    <main className="grid min-h-screen place-items-center p-5 md:p-8">
+      <div className="w-full max-w-[920px] space-y-6">
+        {/* Hero header */}
+        <div className="space-y-2">
+          <Badge variant="secondary" className="mb-2">
+            Tiptap Starter
+          </Badge>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-none">
+            Quiet, fast, and editable.
+          </h1>
+          <p className="text-muted-foreground text-base md:text-lg max-w-[56ch]">
+            A minimal editor shell with no extra dependency noise, tuned for writing and quick formatting.
+          </p>
         </div>
 
-        <div className="toolbar" role="toolbar" aria-label="Editor toolbar">
-          <ToolbarButton
-            active={editor?.isActive('bold')}
-            disabled={!editor}
-            label="Bold"
-            onClick={() => editor?.chain().focus().toggleBold().run()}
-          />
-          <ToolbarButton
-            active={editor?.isActive('italic')}
-            disabled={!editor}
-            label="Italic"
-            onClick={() => editor?.chain().focus().toggleItalic().run()}
-          />
-          <ToolbarButton
-            active={editor?.isActive('bulletList')}
-            disabled={!editor}
-            label="Bullet List"
-            onClick={() => editor?.chain().focus().toggleBulletList().run()}
-          />
-          <ToolbarButton disabled={!editor} label="Clear Marks" onClick={() => editor?.chain().focus().unsetAllMarks().run()} />
-        </div>
+        {/* Editor card */}
+        <Card className="overflow-hidden py-0 gap-0">
+          <CardHeader className="flex-row items-center justify-between px-4 py-3 border-b">
+            <div>
+              <CardTitle className="text-sm">Editor</CardTitle>
+              <CardDescription className="text-xs">Rich text editing powered by Tiptap</CardDescription>
+            </div>
+            <Badge variant={editor?.isEmpty ? 'outline' : 'secondary'} aria-live="polite">
+              {editor?.isEmpty ? 'Empty' : 'Ready'}
+            </Badge>
+          </CardHeader>
 
-        <div className="editor-panel">
-          <EditorContent editor={editor} />
-          {editor?.isEmpty ? (
-            <p className="empty-note">Start with a headline, or type directly into the blank page.</p>
-          ) : null}
-        </div>
-      </section>
+          <Toolbar editor={editor} />
+
+          <CardContent className="p-0">
+            <EditorPanel editor={editor} />
+          </CardContent>
+        </Card>
+      </div>
     </main>
   )
 }
