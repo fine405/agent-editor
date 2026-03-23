@@ -8,6 +8,7 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "3.0.63",
     "@ai-sdk/openai": "^3.0.47",
     "@hono/node-server": "^1.19.11",
     "ai": "^6.0.135",

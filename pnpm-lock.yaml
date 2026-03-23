@@ -78,6 +78,9 @@ importers:
 
   agent-api:
     dependencies:
+      '@ai-sdk/anthropic':
+        specifier: 3.0.63
+        version: 3.0.63(zod@4.3.6)
       '@ai-sdk/openai':
         specifier: ^3.0.47
         version: 3.0.47(zod@4.3.6)
@@ -105,6 +108,12 @@ importers:
         version: 5.9.3
 
 packages:
+
+  '@ai-sdk/anthropic@3.0.63':
+    resolution: {integrity: sha512-SiLosFr0FfKfrNpAAj8mD/i3S5YBB/z5orb1DH3pN1yATuBNjjPMLnRE4P3Dn7Y5cQsro0uzw5g5117hkShWoQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
 
   '@ai-sdk/gateway@2.0.61':
     resolution: {integrity: sha512-zxB5bqe7tx+tX15RHTFdnm7G3PVxh9l6WfeCgnFhhYZ8PfbeLgb3x/YgxO5vwRnaDpfArMXyYjSFjJ9d+I9ZGw==}
@@ -483,7 +492,7 @@ packages:
   '@radix-ui/react-compose-refs@1.1.2':
     resolution: {integrity: sha512-z4eqJvfiNnFMHIIvXP3CY57y2WJs5g2v3X0zm9mEJkrkNv4rDxu+sg9Jh8EkXyeqBkB7SOcboo9dMVqhyrACIg==}
     peerDependencies:
-      '@types/react': 19.0.0
+      '@types/react': '*'
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
@@ -1742,6 +1751,12 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
 snapshots:
+
+  '@ai-sdk/anthropic@3.0.63(zod@4.3.6)':
+    dependencies:
+      '@ai-sdk/provider': 3.0.8
+      '@ai-sdk/provider-utils': 4.0.21(zod@4.3.6)
+      zod: 4.3.6
 
   '@ai-sdk/gateway@2.0.61(zod@4.3.6)':
     dependencies:
